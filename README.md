@@ -626,19 +626,15 @@ One issue with `do_conv` is that it might become too long with time and maybe sl
 
 Because of the registration, the current system has a circular dependence:
 
-```dot
-digraph G {
-    "mutability.py" -> "mutability_tvars.py"
-    "mutability.py" -> "mutability_reg.py" [
-        label="at type-\n  checking time"
-        color="blue" fontcolor="blue"
-    ]
-    "mutability_reg.py" -> "mutability_tvars.py"
-    "mutability_reg.py" -> "X_.py"
-    "X_.py" -> "mutability.py"
+```mermaid
+graph
+    mut[mutability.py] --> tvars[mutability_tvars.py]
+    mut --> |"(at type-\nchecking time)"|reg[mutability_reg.py]
+    reg --> tvars
+    reg --> X[X_.py]
+    X --> mut
 
-    A -> B [label="  A imports B"]
-}
-
+    A --> |A imports B|B
 ```
+
 This isn't a problem at runtime since \"mutability.py" imports "mutability_reg.py" behind an `if TYPE_CHECKING`.
