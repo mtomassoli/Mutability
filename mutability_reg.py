@@ -8,14 +8,15 @@ from mutability_set import set_
 from mutability_dict import dict_
 
 # NOTE:
-# * W, RK, and WK are subtypes of R.
+# * W and RK are subtypes of R; WK is a subtype of W and RK.
 # * `Mut_M` is covariant.
 # * `Mut_M` is in covariant position (i.e. `return` position) in `do_conv`.
-# * If `Mut_M` were in contravariant position (i.e. argument position), then
+# * If `Mut_M` were in contravariant position (i.e. argument position), then,
+#   for instance,
 #     `do_conv: (..., m1: R, ...) -> ...`
 #   would be assignable to
 #     `do_conv: (..., m1: M, ...) -> ...`
-#   for any `M` in `{R, W, RK, WK}`.
+#   for any `M` in {`R`, `W`, `RK`, `WK`}`.
 # * See also "mutability.py".
 
 _T1 = TypeVar('_T1')

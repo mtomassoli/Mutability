@@ -42,11 +42,11 @@ if TYPE_CHECKING:
     _K = TypeVar('_K')
     _V = TypeVar('_V')
     
-    # NOTE: Don't depend on a lock => can be used anywhere
+    # NOTE: These don't depend on a lock => they can be used anywhere
     type dict_out[K, V, M: (R, W, RK, WK)] = dict_[K, V, M, None]
     type dict_r[K, V] = dict_[K, V, R, Any]
 
-    # NOTE: Self or depend on `_L` => can be used only here
+    # NOTE: These are Self or depend on `_L` => they can be used only here
     class _L: ...           # lock
     type _dict_in[K, V, M: (R, W, RK, WK)] = dict_[K, V, M, _L]
     type _Self_W[K, V] = dict_[K, V, W, _L]

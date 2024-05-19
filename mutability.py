@@ -8,7 +8,8 @@ __all__ = [
 
 if TYPE_CHECKING:
     from typing import Any, Callable, overload, TypeVar
-    # NOTE: importing *_reg here avoids a (runtime) circular dependence
+    # NOTE: importing "mutability_reg.py" here instead of at the top avoids a
+    #   (runtime) circular dependence.
     from mutability_reg import do_conv, Liftable
     
     FROM = TypeVar('FROM')
@@ -21,9 +22,8 @@ if TYPE_CHECKING:
     #   conversions (e.g. from `W` to `R`, but not vice versa).
     #   For this reason, it's perfectly safe to suppress the error with a type
     #   ignore.
-    # * Since `m1` is in covariant position in `do_conv`, we can safely restrict
-    #   it even though `R` is a supertype of the other `M` types.
-    #   See also "mutability_reg.py".
+    # * Note that `m1` is in covariant position in `do_conv` for technical
+    #   reasons. See "mutability_reg.py" for details.
 
     def r(obj: FROM, *,
           __st: Callable[[FROM, R, Any], tuple[Any, TO]] = do_conv

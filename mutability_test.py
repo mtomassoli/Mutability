@@ -116,7 +116,7 @@ class MyList[T]:
         #     (using) the value indefinitely.
         #   * Without the `K`, a function MUST only access the value until the
         #     function has returned.
-        #   * `RK` gives read-only access, while `WK` also read-write access.
+        #   * `RK` gives read-only access, while `WK` read-write access.
         # * This avoids redundant copies of the data.
         self.xs_shared = xs
         self.ys_owned = ys

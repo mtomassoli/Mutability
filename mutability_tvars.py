@@ -1,7 +1,7 @@
 from typing import TypeVar
 
 # NOTE: Mut_M is covariant so, for instance, if a function requires an
-#   X_[W, ...], one can pass an X_[W, ...] or an X_[WK, ...].
+#   X_[..., W, ...], one can pass an X_[..., W, ...] or an X_[..., WK, ...].
 
 class R: ...
 class W(R): ...

@@ -15,11 +15,11 @@ if TYPE_CHECKING:
 
     _T = TypeVar('_T')
     
-    # NOTE: Don't depend on a lock => can be used anywhere
+    # NOTE: These don't depend on a lock => they can be used anywhere
     type set_out[T, M: (R, W, RK, WK)] = set_[T, M, None]
     type set_r[T] = set_[T, R, Any]
 
-    # NOTE: Self or depend on `_L` => can be used only here
+    # NOTE: These are Self or depend on `_L` => they can be used only here
     class _L: ...           # lock
     type _set_in[T, M: (R, W, RK, WK)] = set_[T, M, _L]
     type _Self_W[T] = set_[T, W, _L]
